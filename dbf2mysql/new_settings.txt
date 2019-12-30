@@ -1,0 +1,78 @@
+INSERT INTO `settings` (`id`, `key`, `value`) VALUES
+(14, 'app_SeuilAffichageAchatsEnMois', '18'),
+(15, 'app_SeuilAffichageEngagementsEnMois', '18');
+
+ALTER TABLE `fournisseurs` 
+CHANGE `Adresse` `Adresse` VARCHAR(99) CHARSET latin1 COLLATE latin1_general_ci NULL, 
+CHANGE `Ville` `Ville` VARCHAR(99) CHARSET latin1 COLLATE latin1_general_ci NULL, 
+CHANGE `Pays` `Pays` VARCHAR(99) CHARSET latin1 COLLATE latin1_general_ci NULL, 
+CHANGE `Telephone_1` `Telephone_1` VARCHAR(99) CHARSET latin1 COLLATE latin1_general_ci NULL, 
+CHANGE `Telephone_2` `Telephone_2` VARCHAR(99) CHARSET latin1 COLLATE latin1_general_ci NULL, 
+CHANGE `Email_1` `Email_1` VARCHAR(99) CHARSET latin1 COLLATE latin1_general_ci NULL, 
+CHANGE `Email_2` `Email_2` VARCHAR(99) CHARSET latin1 COLLATE latin1_general_ci NULL, 
+CHANGE `IBAN_1` `IBAN_1` VARCHAR(99) CHARSET latin1 COLLATE latin1_general_ci NULL, 
+CHANGE `IBAN_2` `IBAN_2` VARCHAR(99) CHARSET latin1 COLLATE latin1_general_ci NULL, 
+CHANGE `Id_Creator` `Id_Creator` INT(11) NULL; 
+
+ALTER TABLE `engagements_importation` 
+CHANGE `Montant` `Montant` DECIMAL(12,2) NULL, 
+CHANGE `Id_Banque` `Id_Banque` INT(11) NULL, 
+CHANGE `Id_Creator` `Id_Creator` INT(11) NULL; 
+
+ALTER TABLE `achats_import` 
+CHANGE `Id_Creator` `Id_Creator` INT(11) NULL,
+CHANGE `Taux_Change` `Taux_Change` DECIMAL(12,6) NOT NULL,
+CHANGE `Num_Quittance` `Num_Quittance` VARCHAR(11) CHARSET latin1 COLLATE latin1_general_ci NOT NULL,
+CHANGE `Num_Facture` `Num_Facture` VARCHAR(13) CHARSET latin1 COLLATE latin1_general_ci NULL,
+CHANGE `Date_Facture` `Date_Facture` DATE NULL,
+CHANGE `Date_Quittance` `Date_Quittance` DATE NULL,
+CHANGE `Poids_Net` `Poids_Net` DECIMAL(9,2) NOT NULL, 
+CHANGE `Poids_Brut` `Poids_Brut` DECIMAL(9,2) NOT NULL; 
+
+ALTER TABLE `effets_fournisseurs` 
+CHANGE `Id_Achat` `Id_Achat` INT(11) NULL,
+CHANGE `Date_Acceptation` `Date_Acceptation` DATE NULL,
+CHANGE `Id_Creator` `Id_Creator` INT(11) NULL,
+CHANGE `Id_Fournisseur` `Id_Fournisseur` INT(11) NULL; 
+
+ALTER TABLE `credocs_fournisseurs` 
+CHANGE `Id_Achat` `Id_Achat` INT(11) NULL,
+CHANGE `Date_Acceptation` `Date_Acceptation` DATE NULL,
+CHANGE `Id_Creator` `Id_Creator` INT(11) NULL,
+CHANGE `Id_Fournisseur` `Id_Fournisseur` INT(11) NULL; 
+
+# Still to be imported
+ALTER TABLE `achats_import` 
+CHANGE `Id_Fournisseur` `Id_Fournisseur` INT(11) NULL, 
+CHANGE `Id_Code` `Id_Code` INT(11) NULL,
+CHANGE `Marchandises` `Marchandises` VARCHAR(99) CHARSET latin1 COLLATE latin1_general_ci NULL; 
+
+CREATE TABLE `avoirs` ( 
+	`Id_Avoir` INT NOT NULL AUTO_INCREMENT,
+	`Num_Avoir` VARCHAR(7) NOT NULL,
+	`Date_Avoir` DATE,
+	`Total_Avoir` DECIMAL(13,2),
+	`Observation` VARCHAR(51),
+	`Id_Creator` INT,
+	`Date_Created` DATE,
+	`Id_Editor` INT,
+	`Date_Edited` DATE,
+	PRIMARY KEY (`Id_Avoir`)); 
+
+ALTER TABLE `roles` 
+CHANGE `Peut_Lister` `Peut_Lister` SET('Factures Clients','Effets Clients','Cheques','Virements Versements','Avoirs','Clients','Achats Import','Credocs Fournisseurs','Achats Locaux','Effets Fournisseurs','Engagements Importation','Fournisseurs','Roles','Utilisateurs','Salaires','Banques','Nature Marchandises','Code Marchandises','Settings','Taux Conversion','Etats','Controle Reglement Factures','Reglement Mixte','Verification Factures') CHARSET latin1 COLLATE latin1_general_ci NOT NULL,
+CHANGE `Peut_Lire` `Peut_Lire` SET('Factures Clients','Effets Clients','Cheques','Virements Versements','Avoirs','Clients','Achats Import','Credocs Fournisseurs','Achats Locaux','Effets Fournisseurs','Engagements Importation','Fournisseurs','Roles','Utilisateurs','Salaires','Banques','Nature Marchandises','Code Marchandises','Settings','Taux Conversion','Etats','Controle Reglement Factures','Reglement Mixte','Verification Factures') CHARSET latin1 COLLATE latin1_general_ci NOT NULL,
+CHANGE `Peut_Ajouter` `Peut_Ajouter` SET('Factures Clients','Effets Clients','Cheques','Virements Versements','Avoirs','Clients','Achats Import','Credocs Fournisseurs','Achats Locaux','Effets Fournisseurs','Engagements Importation','Fournisseurs','Roles','Utilisateurs','Salaires','Banques','Nature Marchandises','Code Marchandises','Settings','Taux Conversion','Etats','Controle Reglement Factures','Reglement Mixte','Verification Factures') CHARSET latin1 COLLATE latin1_general_ci NOT NULL,
+CHANGE `Peut_Modifier` `Peut_Modifier` SET('Factures Clients','Effets Clients','Cheques','Virements Versements','Avoirs','Clients','Achats Import','Credocs Fournisseurs','Achats Locaux','Effets Fournisseurs','Engagements Importation','Fournisseurs','Roles','Utilisateurs','Salaires','Banques','Nature Marchandises','Code Marchandises','Settings','Taux Conversion','Etats','Controle Reglement Factures','Reglement Mixte','Verification Factures') CHARSET latin1 COLLATE latin1_general_ci NOT NULL,
+CHANGE `Peut_Supprimer` `Peut_Supprimer` SET('Factures Clients','Effets Clients','Cheques','Virements Versements','Avoirs','Clients','Achats Import','Credocs Fournisseurs','Achats Locaux','Effets Fournisseurs','Engagements Importation','Fournisseurs','Roles','Utilisateurs','Salaires','Banques','Nature Marchandises','Code Marchandises','Settings','Taux Conversion','Etats','Controle Reglement Factures','Reglement Mixte','Verification Factures') CHARSET latin1 COLLATE latin1_general_ci NOT NULL;
+
+UPDATE `roles` SET `Peut_Lister` = 'Factures Clients,Effets Clients,Cheques,Virements Versements,Avoirs,Clients,Achats Import,Credocs Fournisseurs,Achats Locaux,Effets Fournisseurs,Engagements Importation,Fournisseurs,Roles,Utilisateurs,Salaires,Banques,Nature Marchandises,Code Marchandises,Settings,Taux Conversion,Etats,Controle Reglement Factures,Reglement Mixte,Verification Factures' , `Peut_Ajouter` = 'Factures Clients,Effets Clients,Cheques,Virements Versements,Avoirs,Clients,Achats Import,Credocs Fournisseurs,Achats Locaux,Effets Fournisseurs,Engagements Importation,Fournisseurs,Roles,Utilisateurs,Salaires,Banques,Nature Marchandises,Code Marchandises,Settings,Taux Conversion' , `Peut_Modifier` = 'Factures Clients,Effets Clients,Cheques,Virements Versements,Avoirs,Clients,Achats Import,Credocs Fournisseurs,Achats Locaux,Effets Fournisseurs,Engagements Importation,Fournisseurs,Roles,Utilisateurs,Salaires,Banques,Nature Marchandises,Code Marchandises,Settings,Taux Conversion' , `Peut_Supprimer` = 'Factures Clients,Effets Clients,Cheques,Virements Versements,Avoirs,Clients,Achats Import,Credocs Fournisseurs,Achats Locaux,Effets Fournisseurs,Engagements Importation,Fournisseurs,Roles,Utilisateurs,Salaires,Banques,Nature Marchandises,Code Marchandises,Settings,Taux Conversion' WHERE `Id_Role` = '1'; 
+UPDATE `roles` SET `Peut_Lister` = 'Effets Clients,Cheques,Virements Versements,Avoirs,Effets Fournisseurs,Banques' , `Peut_Lire` = 'Effets Clients,Cheques,Virements Versements,Avoirs,Effets Fournisseurs,Banques' , `Peut_Ajouter` = 'Effets Clients,Cheques,Virements Versements,Avoirs,Effets Fournisseurs,Banques' WHERE `Id_Role` = '2'; 
+
+ALTER TABLE `achats_locaux` 
+CHANGE `Id_Creator` `Id_Creator` INT(11) NULL,
+CHANGE `Poids` `Poids` DECIMAL(9,2) NULL,
+CHANGE `Id_Code` `Id_Code` INT(11) NULL,
+CHANGE `TVA` `TVA` DECIMAL(9,2) NULL,
+CHANGE `Marchandises` `Marchandises` VARCHAR(99) CHARSET latin1 COLLATE latin1_general_ci NULL,
+CHANGE `Montant_HT` `Montant_HT` DECIMAL(9,2) NULL; 

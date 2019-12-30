@@ -1,0 +1,15 @@
+syntax: glob
+
+application/config/database.php
+application/config/config.php
+application/cache/ci_session*
+assets/pdfs/*
+application/libraries/dompdf/lib/fonts/log.htm*
+.idea
+.nginx
+.php-fpm
+*.sql
+CI_phpStorm.php
+docker-compose.yml
+.DS_Store
+application/.DS_Store
